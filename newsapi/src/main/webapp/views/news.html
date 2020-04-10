@@ -1,0 +1,59 @@
+<div ng-controller="newsController" ng-init="init()">
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="form-group">
+		    	<label>Select Country</label>
+		        <select class="form-control select2" ng-model="country" ng-options="option.country for option in selectOptions track by option.code" style="width: 100%">
+		        	
+		        </select>
+		    </div>
+		</div>
+		<div class="col-lg-4">
+				<div class="form-group">
+			    	<label>Select News Category</label>
+			        <select class="form-control select2" multiple="multiple" ng-model="selectedCategories" ng-options="catgory for catgory in catgories track by catgory" style="width: 100%">
+			        	
+			        </select>
+			    </div>
+			</div>
+		<div class="col-lg-2">
+			<div class="form-group">
+	        	<label>Enter Limit For News</label>
+	            <input type="text" ng-model="searchLimit" class="form-control" placeholder="Enter Limit">
+	        </div>
+		</div>	
+		<div class="col-lg-3">
+			<button class="btn btn-primary m-t-30" ng-click="getNews()">
+				<span ng-if="isSearching">
+					<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Searching..
+				</span>
+				<span ng-if="!isSearching">
+					Search
+				</span>
+			</button>
+			<button class="btn btn-default m-t-30" ng-click="clearSearch()">Clear</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div ng-repeat="news in newsData track by $index">
+				<div class="panel-group" id="accordion">
+				  <div class="panel panel-default">
+				    <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#coll_{{$index}}">
+				      <h6 class="panel-title">
+				        <a class="font-bold">{{news.title}}</a>
+				      </h6>
+				    </div>
+				    <div id="coll_{{$index}}" class="panel-collapse collapse in">
+				      <div class="panel-body">
+				      <span><b>Source Name : </b></span>{{news.source.name}}<br>
+				      <span><b>Content : </b></span>
+				      {{news.description}}
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
